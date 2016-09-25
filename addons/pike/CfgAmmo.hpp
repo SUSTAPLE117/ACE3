@@ -1,10 +1,10 @@
 class CfgAmmo {
     class FlareBase;
     class GVAR(ammo_gl): FlareBase {
-        model = "\A3\weapons_f\ammo\UGL_slug";
+        model = QPATHTOF(models\ace_pike_ammo.p3d);
         lightColor[] = {0, 0, 0, 0};
         smokeColor[] = {0, 0, 0, 0};
-        timeToLive = 2;
+        timeToLive = 1;
     };
 
     class M_Titan_AT;
@@ -14,11 +14,11 @@ class CfgAmmo {
         airLock = 0;
         manualControl = 0;
 
-        // model = "\A3\weapons_f\ammo\UGL_slug";
-        maxSpeed = 120;
-        thrust = 45;
+        model = QPATHTOF(models\ace_pike_ammo.p3d);
+        maxSpeed = 100;
+        thrust = 60;
         
-        hit = 80;
+        hit = 100;
         indirectHit = 8;
         indirectHitRange = 6;
 

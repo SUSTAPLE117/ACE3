@@ -24,7 +24,7 @@ if (_ammo != QGVAR(ammo_gl)) exitWith {};
     TRACE_7("rocket stage",_unit, _weapon, _muzzle, _mode, _ammo, _magazine, _projectile);
 
     //If null (deleted or hit water) exit:
-    if (isNull _projectile) exitWith {TRACE_};
+    if (isNull _projectile) exitWith {};
 
     private _posASL = getPosASL _projectile;
     private _vel = velocity _projectile;
@@ -34,10 +34,16 @@ if (_ammo != QGVAR(ammo_gl)) exitWith {};
     deleteVehicle _projectile;
 
     private _rocket = QGVAR(ammo_rocket) createVehicle (getPosATL _projectile);
+    
     _rocket setPosASL _posASL;
 
     // Set correct velocity and direction
-    [_rocket, _vel] call EFUNC(missileguidance,changeMissileDirection);
+    _rocket setVelocity _vel;
+    [_rocket, vectorNormalized _vel] call EFUNC(missileguidance,changeMissileDirection);
+    
+    
+    private _vel = velocity _rocket;
+    systemChat format ["rocket %1 %2",_vel, round vectorMagnitude _vel];
 
     // Start missile guidance
     [_unit, _weapon, _muzzle, _mode, QGVAR(ammo_rocket), _magazine, _rocket] call EFUNC(missileguidance,onFired);
@@ -46,9 +52,9 @@ if (_ammo != QGVAR(ammo_gl)) exitWith {};
     [{
         params ["_args", "_pfID"];
         _args params [["_rocket", objNull]];
-        if (!alive _rocket) exitWith {[_pfID] call CBA_fnc_removePerFrameHandler;};
+        if (!alive _rocket) exitWith {systemChat "done"; [_pfID] call CBA_fnc_removePerFrameHandler;};
         drawIcon3D ["\a3\ui_f\data\IGUI\Cfg\Cursors\selectover_ca.paa", [1,0,1,1], ASLtoAGL getPosASL _rocket, 0.75, 0.75, 0, "", 1, 0.025, "TahomaB"];
-        hintSilent format ["%1\n%2",velocity _rocket, round vectorMagnitude velocity _rocket];
+        hintSilent format ["%1\n%2\n%3",velocity _rocket, round vectorMagnitude velocity _rocket, time];
     }, 0, [_rocket]] call CBA_fnc_addPerFrameHandler;
     #endif
     
