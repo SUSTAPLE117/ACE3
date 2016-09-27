@@ -100,9 +100,9 @@ double calculateAirDensity(double temperature, double pressure, double relativeH
 
 	if (relativeHumidity > 0)
 	{
-		double _pSat = 6.1078 * pow(10, ((7.5 * temperature) / (temperature + 237.3)));
-		double vaporPressure = relativeHumidity * _pSat;
-		double partialPressure = pressure - vaporPressure;
+		auto _pSat = 6.1078 * pow(10, ((7.5 * temperature) / (temperature + 237.3)));
+		auto vaporPressure = relativeHumidity * _pSat;
+		auto partialPressure = pressure - vaporPressure;
 
 		return (partialPressure * DRY_AIR_MOLAR_MASS + vaporPressure * WATER_VAPOR_MOLAR_MASS) / (UNIVERSAL_GAS_CONSTANT * KELVIN(temperature));
 	}
@@ -114,22 +114,19 @@ double calculateAirDensity(double temperature, double pressure, double relativeH
 
 double calculateAtmosphericCorrection(double ballisticCoefficient, double temperature, double pressure, double relativeHumidity, const char* atmosphereModel)
 {
-	double airDensity = calculateAirDensity(temperature, pressure, relativeHumidity);
+	auto airDensity = calculateAirDensity(temperature, pressure, relativeHumidity);
 
 	if (!strcmp(atmosphereModel, "ICAO"))
 	{
 		return (STD_AIR_DENSITY_ICAO / airDensity) * ballisticCoefficient;
 	}
-	else
-	{
-		return (STD_AIR_DENSITY_ASM / airDensity) * ballisticCoefficient;
-	}
+	return (STD_AIR_DENSITY_ASM / airDensity) * ballisticCoefficient;
 }
 
 double calculateRetard(int DragFunction, double DragCoefficient, double Velocity)
 {
-	double vel = Velocity * 3.2808399;
-	double val = -1;
+	auto vel = Velocity * 3.2808399;
+	double val;
 	double A = -1;
 	double M = -1;
 
