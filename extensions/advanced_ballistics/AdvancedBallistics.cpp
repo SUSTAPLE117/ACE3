@@ -67,16 +67,16 @@ double calculateRoughnessLength(double posX, double posY)
 {
 	// Source: http://es.ucsc.edu/~jnoble/wind/extrap/index.html
 	double roughness_lengths[10] = {0.0002, 0.0005, 0.0024, 0.03, 0.055, 0.1, 0.2, 0.4, 0.8, 1.6};
-	double roughnessLength = 0.0024;
+	auto roughnessLength = 0.0024;
 
-	int gridX = (int)floor(posX / 50);
-	int gridY = (int)floor(posY / 50);
-	int gridCell = gridX * map->mapGrids + gridY;
+	auto gridX = static_cast<int>(floor(posX / 50));
+	auto gridY = static_cast<int>(floor(posY / 50));
+	auto gridCell = gridX * map->mapGrids + gridY;
 
-	if (gridCell >= 0 && (std::size_t)gridCell < map->gridHeights.size() && (std::size_t)gridCell < map->gridBuildingNums.size())
+	if (gridCell >= 0 && static_cast<std::size_t>(gridCell) < map->gridHeights.size() && static_cast<std::size_t>(gridCell) < map->gridBuildingNums.size())
 	{
-		int nearBuildings = map->gridBuildingNums[gridCell];
-		int surfaceIsWater = map->gridSurfaceIsWater[gridCell];
+		auto nearBuildings = map->gridBuildingNums[gridCell];
+		auto surfaceIsWater = map->gridSurfaceIsWater[gridCell];
 
 		if (nearBuildings == 0 && surfaceIsWater == 1)
 		{
@@ -91,7 +91,7 @@ double calculateRoughnessLength(double posX, double posY)
 		return roughness_lengths[2 + std::min(nearBuildings, 6)];
 	}
 
-	return 0.0024;
+	return roughnessLength;
 }
 
 double calculateAirDensity(double temperature, double pressure, double relativeHumidity)
