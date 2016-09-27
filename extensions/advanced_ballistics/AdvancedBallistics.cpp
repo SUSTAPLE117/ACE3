@@ -569,8 +569,8 @@ void __stdcall RVExtension(char* output, int outputSize, const char* function)
 	}
 
 	char* input = _strdup(function);
-	char* token = NULL;
-	char* next_token = NULL;
+	char* token = nullptr;
+	char* next_token = nullptr;
 	char* mode = strtok_s(input, ":", &next_token);
 
 	if (!strcmp(mode, "retard"))
@@ -580,9 +580,9 @@ void __stdcall RVExtension(char* output, int outputSize, const char* function)
 		double velocity = 0.0;
 		double retard = 0.0;
 
-		dragModel = strtol(strtok_s(NULL, ":", &next_token), NULL, 10);
-		ballisticCoefficient = strtod(strtok_s(NULL, ":", &next_token), NULL);
-		velocity = strtod(strtok_s(NULL, ":", &next_token), NULL);
+		dragModel = strtol(strtok_s(nullptr, ":", &next_token), nullptr, 10);
+		ballisticCoefficient = strtod(strtok_s(nullptr, ":", &next_token), nullptr);
+		velocity = strtod(strtok_s(nullptr, ":", &next_token), nullptr);
 
 		retard = calculateRetard(dragModel, ballisticCoefficient, velocity);
 		// int n = sprintf(output,  "%f", retard);
@@ -600,11 +600,11 @@ void __stdcall RVExtension(char* output, int outputSize, const char* function)
 		double humidity = 0.0;
 		char* atmosphereModel;
 
-		ballisticCoefficient = strtod(strtok_s(NULL, ":", &next_token), NULL);
-		temperature = strtod(strtok_s(NULL, ":", &next_token), NULL);
-		pressure = strtod(strtok_s(NULL, ":", &next_token), NULL);
-		humidity = strtod(strtok_s(NULL, ":", &next_token), NULL);
-		atmosphereModel = strtok_s(NULL, ":", &next_token);
+		ballisticCoefficient = strtod(strtok_s(nullptr, ":", &next_token), nullptr);
+		temperature = strtod(strtok_s(nullptr, ":", &next_token), nullptr);
+		pressure = strtod(strtok_s(nullptr, ":", &next_token), nullptr);
+		humidity = strtod(strtok_s(nullptr, ":", &next_token), nullptr);
+		atmosphereModel = strtok_s(nullptr, ":", &next_token);
 
 		ballisticCoefficient = calculateAtmosphericCorrection(ballisticCoefficient, temperature, pressure, humidity, atmosphereModel);
 		//int n = sprintf(output,  "%f", ballisticCoefficient);
@@ -638,48 +638,48 @@ void __stdcall RVExtension(char* output, int outputSize, const char* function)
 		double overcast = 0.0;
 		double tickTime = 0.0;
 
-		index = strtol(strtok_s(NULL, ":", &next_token), NULL, 10);
-		airFriction = strtod(strtok_s(NULL, ":", &next_token), NULL);
-		ballisticCoefficientArray = strtok_s(NULL, ":", &next_token);
+		index = strtol(strtok_s(nullptr, ":", &next_token), nullptr, 10);
+		airFriction = strtod(strtok_s(nullptr, ":", &next_token), nullptr);
+		ballisticCoefficientArray = strtok_s(nullptr, ":", &next_token);
 		ballisticCoefficientArray++;
 		ballisticCoefficientArray[strlen(ballisticCoefficientArray) - 1] = 0;
 		ballisticCoefficient = strtok_s(ballisticCoefficientArray, ",", &token);
-		while (ballisticCoefficient != NULL)
+		while (ballisticCoefficient != nullptr)
 		{
-			ballisticCoefficients.push_back(strtod(ballisticCoefficient, NULL));
-			ballisticCoefficient = strtok_s(NULL, ",", &token);
+			ballisticCoefficients.push_back(strtod(ballisticCoefficient, nullptr));
+			ballisticCoefficient = strtok_s(nullptr, ",", &token);
 		}
-		velocityBoundaryArray = strtok_s(NULL, ":", &next_token);
+		velocityBoundaryArray = strtok_s(nullptr, ":", &next_token);
 		velocityBoundaryArray++;
 		velocityBoundaryArray[strlen(velocityBoundaryArray) - 1] = 0;
 		velocityBoundary = strtok_s(velocityBoundaryArray, ",", &token);
-		while (velocityBoundary != NULL)
+		while (velocityBoundary != nullptr)
 		{
-			velocityBoundaries.push_back(strtod(velocityBoundary, NULL));
-			velocityBoundary = strtok_s(NULL, ",", &token);
+			velocityBoundaries.push_back(strtod(velocityBoundary, nullptr));
+			velocityBoundary = strtok_s(nullptr, ",", &token);
 		}
-		atmosphereModel = strtok_s(NULL, ":", &next_token);
-		dragModel = strtol(strtok_s(NULL, ":", &next_token), NULL, 10);
-		stabilityFactor = strtod(strtok_s(NULL, ":", &next_token), NULL);
-		twistDirection = strtol(strtok_s(NULL, ":", &next_token), NULL, 10);
-		muzzleVelocity = strtod(strtok_s(NULL, ":", &next_token), NULL);
-		transonicStabilityCoef = strtod(strtok_s(NULL, ":", &next_token), NULL);
-		originArray = strtok_s(NULL, ":", &next_token);
+		atmosphereModel = strtok_s(nullptr, ":", &next_token);
+		dragModel = strtol(strtok_s(nullptr, ":", &next_token), nullptr, 10);
+		stabilityFactor = strtod(strtok_s(nullptr, ":", &next_token), nullptr);
+		twistDirection = strtol(strtok_s(nullptr, ":", &next_token), nullptr, 10);
+		muzzleVelocity = strtod(strtok_s(nullptr, ":", &next_token), nullptr);
+		transonicStabilityCoef = strtod(strtok_s(nullptr, ":", &next_token), nullptr);
+		originArray = strtok_s(nullptr, ":", &next_token);
 		originArray++;
 		originArray[strlen(originArray) - 1] = 0;
 		originEntry = strtok_s(originArray, ",", &token);
-		while (originEntry != NULL)
+		while (originEntry != nullptr)
 		{
-			origin.push_back(strtod(originEntry, NULL));
-			originEntry = strtok_s(NULL, ",", &token);
+			origin.push_back(strtod(originEntry, nullptr));
+			originEntry = strtok_s(nullptr, ",", &token);
 		}
-		latitude = strtod(strtok_s(NULL, ":", &next_token), NULL);
-		temperature = strtod(strtok_s(NULL, ":", &next_token), NULL);
-		altitude = strtod(strtok_s(NULL, ":", &next_token), NULL);
-		humidity = strtod(strtok_s(NULL, ":", &next_token), NULL);
-		overcast = strtod(strtok_s(NULL, ":", &next_token), NULL);
-		tickTime = strtod(strtok_s(NULL, ":", &next_token), NULL);
-		tickTime += strtod(strtok_s(NULL, ":", &next_token), NULL);
+		latitude = strtod(strtok_s(nullptr, ":", &next_token), nullptr);
+		temperature = strtod(strtok_s(nullptr, ":", &next_token), nullptr);
+		altitude = strtod(strtok_s(nullptr, ":", &next_token), nullptr);
+		humidity = strtod(strtok_s(nullptr, ":", &next_token), nullptr);
+		overcast = strtod(strtok_s(nullptr, ":", &next_token), nullptr);
+		tickTime = strtod(strtok_s(nullptr, ":", &next_token), nullptr);
+		tickTime += strtod(strtok_s(nullptr, ":", &next_token), nullptr);
 
 		while (index >= bulletDatabase.size())
 		{
@@ -726,28 +726,28 @@ void __stdcall RVExtension(char* output, int outputSize, const char* function)
 		double heightAGL = 0.0;
 		double tickTime = 0.0;
 
-		index = strtol(strtok_s(NULL, ":", &next_token), NULL, 10);
-		velocityArray = strtok_s(NULL, ":", &next_token);
+		index = strtol(strtok_s(nullptr, ":", &next_token), nullptr, 10);
+		velocityArray = strtok_s(nullptr, ":", &next_token);
 		velocityArray++;
 		velocityArray[strlen(velocityArray) - 1] = 0;
-		velocity[0] = strtod(strtok_s(velocityArray, ",", &token), NULL);
-		velocity[1] = strtod(strtok_s(NULL, ",", &token), NULL);
-		velocity[2] = strtod(strtok_s(NULL, ",", &token), NULL);
-		positionArray = strtok_s(NULL, ":", &next_token);
+		velocity[0] = strtod(strtok_s(velocityArray, ",", &token), nullptr);
+		velocity[1] = strtod(strtok_s(nullptr, ",", &token), nullptr);
+		velocity[2] = strtod(strtok_s(nullptr, ",", &token), nullptr);
+		positionArray = strtok_s(nullptr, ":", &next_token);
 		positionArray++;
 		positionArray[strlen(positionArray) - 1] = 0;
-		position[0] = strtod(strtok_s(positionArray, ",", &token), NULL);
-		position[1] = strtod(strtok_s(NULL, ",", &token), NULL);
-		position[2] = strtod(strtok_s(NULL, ",", &token), NULL);
-		windArray = strtok_s(NULL, ":", &next_token);
+		position[0] = strtod(strtok_s(positionArray, ",", &token), nullptr);
+		position[1] = strtod(strtok_s(nullptr, ",", &token), nullptr);
+		position[2] = strtod(strtok_s(nullptr, ",", &token), nullptr);
+		windArray = strtok_s(nullptr, ":", &next_token);
 		windArray++;
 		windArray[strlen(windArray) - 1] = 0;
-		wind[0] = strtod(strtok_s(windArray, ",", &token), NULL);
-		wind[1] = strtod(strtok_s(NULL, ",", &token), NULL);
-		wind[2] = strtod(strtok_s(NULL, ",", &token), NULL);
-		heightAGL = strtod(strtok_s(NULL, ":", &next_token), NULL);
-		tickTime = strtod(strtok_s(NULL, ":", &next_token), NULL);
-		tickTime += strtod(strtok_s(NULL, ":", &next_token), NULL);
+		wind[0] = strtod(strtok_s(windArray, ",", &token), nullptr);
+		wind[1] = strtod(strtok_s(nullptr, ",", &token), nullptr);
+		wind[2] = strtod(strtok_s(nullptr, ",", &token), nullptr);
+		heightAGL = strtod(strtok_s(nullptr, ":", &next_token), nullptr);
+		tickTime = strtod(strtok_s(nullptr, ":", &next_token), nullptr);
+		tickTime += strtod(strtok_s(nullptr, ":", &next_token), nullptr);
 
 		if (bulletDatabase[index].randSeed == 0)
 		{
@@ -955,9 +955,9 @@ void __stdcall RVExtension(char* output, int outputSize, const char* function)
 		int numObjects = 0;
 		int surfaceIsWater = 0;
 
-		height = strtol(strtok_s(NULL, ":", &next_token), NULL, 10);
-		numObjects = strtol(strtok_s(NULL, ":", &next_token), NULL, 10);
-		surfaceIsWater = strtol(strtok_s(NULL, ":", &next_token), NULL, 10);
+		height = strtol(strtok_s(nullptr, ":", &next_token), nullptr, 10);
+		numObjects = strtol(strtok_s(nullptr, ":", &next_token), nullptr, 10);
+		surfaceIsWater = strtol(strtok_s(nullptr, ":", &next_token), nullptr, 10);
 
 		map->gridHeights.push_back(height);
 		map->gridBuildingNums.push_back(numObjects);
@@ -972,8 +972,8 @@ void __stdcall RVExtension(char* output, int outputSize, const char* function)
 		int mapGrids = 0;
 		int gridCells = 0;
 
-		worldName = strtok_s(NULL, ":", &next_token);
-		mapSize = strtol(strtok_s(NULL, ":", &next_token), NULL, 10);
+		worldName = strtok_s(nullptr, ":", &next_token);
+		mapSize = strtol(strtok_s(nullptr, ":", &next_token), nullptr, 10);
 
 		mapGrids = (int)ceil((double)mapSize / 50.0) + 1;
 		gridCells = mapGrids * mapGrids;
